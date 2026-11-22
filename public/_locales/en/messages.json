@@ -1,0 +1,11 @@
+{
+  "extName": {
+    "message": "HackBar Reborn"
+  },
+  "extDesc": {
+    "message": "Request replay, encoding toolbox and SQLi helpers for web security testing."
+  },
+  "extAction": {
+    "message": "Open HackBar side panel"
+  }
+}

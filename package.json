@@ -1,0 +1,41 @@
+{
+  "name": "hackbar-clone",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "HackBar 复刻版：请求重放 + 编解码工具箱 + SQLi 辅助",
+  "keywords": [
+    "chrome-extension",
+    "manifest-v3",
+    "hackbar",
+    "pentest",
+    "security-testing",
+    "sql-injection"
+  ],
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "dev": "node --require ./scripts/vite-patch.cjs ./node_modules/vite/bin/vite.js",
+    "build": "node --require ./scripts/vite-patch.cjs ./node_modules/vite/bin/vite.js build",
+    "typecheck": "tsc --noEmit",
+    "test": "node --disable-warning=ExperimentalWarning --import ./scripts/ts-hooks.mjs scripts/test-core.ts",
+    "test:send": "node --disable-warning=ExperimentalWarning --import ./scripts/ts-hooks.mjs scripts/test-send.ts",
+    "test:ui": "node scripts/smoke-ui.mjs",
+    "test:all": "npm run test && npm run test:send && npm run test:ui",
+    "icons": "python scripts/gen_icons.py",
+    "pack": "python scripts/pack.py"
+  },
+  "dependencies": {
+    "vue": "^3.5.44"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.3.6",
+    "@types/node": "^26.6.5",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "jsdom": "^27.0.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "extName": {
+    "message": "HackBar 复刻版"
+  },
+  "extDesc": {
+    "message": "请求重放 + 编解码工具箱 + SQLi 辅助，面向 Web 安全测试。"
+  },
+  "extAction": {
+    "message": "打开 HackBar 侧边栏"
+  }
+}
