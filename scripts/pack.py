@@ -33,7 +33,9 @@ for html in ("sidepanel.html", "panel.html", "replay.html"):
 RELEASE.mkdir(exist_ok=True)
 target = RELEASE / f"hackbar-clone-v{version}.zip"
 
-with zipfile.ZipFile(target, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+with zipfile.ZipFile(
+    target, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9
+) as zf:
     for path in sorted(DIST.rglob("*")):
         if path.is_dir():
             continue

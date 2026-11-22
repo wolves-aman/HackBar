@@ -1,5 +1,6 @@
 """生成扩展图标：深色圆角底 + 橙色 HB 字标。"""
 
+import io
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -76,6 +77,21 @@ def render(size: int) -> Image.Image:
     return img.resize((size, size), Image.LANCZOS)
 
 
+def save_optimized(image: Image.Image, path: Path) -> int:
+    """调色板量化 + optimize：同一张图从 ~6.6KB 降到 ~1KB，肉眼看不出差别。"""
+    best: bytes | None = None
+    for colors in (16, 24, 32, 64):
+        buf = io.BytesIO()
+        image.quantize(colors=colors, method=Image.FASTOCTREE).save(
+            buf, format="PNG", optimize=True
+        )
+        data = buf.getvalue()
+        if best is None or len(data) < len(best):
+            best = data
+    path.write_bytes(best or b"")
+    return len(best or b"")
+
+
 for size in (16, 32, 48, 128):
-    render(size).save(OUT / f"{size}.png")
-    print("wrote", OUT / f"{size}.png")
+    written = save_optimized(render(size), OUT / f"{size}.png")
+    print(f"wrote {OUT / f'{size}.png'} ({written} B)")
